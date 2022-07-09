@@ -1,4 +1,4 @@
-**실행화면 : [URL](https://bh946.github.io/React_Naver_Movie_API/)**
+**실행화면 : [URL](https://bh946.github.io/react-naver-movie-api/)**
 
 
 
