@@ -1,6 +1,18 @@
-**실행화면 : [URL](https://bh946.github.io/react-naver-movie-api/)**
+## gh-pages에서 proxy관련
 
+결론부터 얘기하자면 gh-pages 패키지에서는 proxy가 잘 적용이 안되는것 같다. dev(본인 로컬 개발자 모드)에서는 proxy가 잘 적용이 된다(http-proxy-middleware)
 
+이번 소스에서는 api를 사용하기 위해 요청을 하지만, 클라이언트와 서버가 사용하는 포트가 다를경우 api요청을 자동으로 거절하는 cors 문제가 있었다.
+
+cors 해결을 위해 proxy를 이용해 요청 주소를 api 서버와 맞게 잘 변경해서 사용했는데, dev에선 잘 동작하고 gh-pages에선 잘 동작하지 않는다. 
+
+아마도 gh-pages(리액트때매 사용했음)로 하지 않는다면 proxy 잘 적용 될 것 같긴하다.  
+https://github.com/jiho3894/Charliving 그런데 이분은 똑같이 리액트이며, api를 사용하는데 왜 cors문제가 없는건지 궁금하다..  
+https://github.com/velopert/react-tutorial/blob/master/redux-middleware/09-cors-and-proxy.md
+
+**gh-pages 실행화면 : [URL](https://bh946.github.io/react-naver-movie-api/)**
+
+<br>
 
 ## 기본 필요지식, 기초
 
