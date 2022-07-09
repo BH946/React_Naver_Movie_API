@@ -1,3 +1,7 @@
+**실행화면 : [URL](https://bh946.github.io/React_Naver_Movie_API/)**
+
+
+
 ## 기본 필요지식, 기초
 
 **git bash로 npx create-react-app 폴더명 으로 설치**
