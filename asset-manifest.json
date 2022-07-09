@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/react-naver-movie-api/static/js/main.ad02f6ff.js",
+    "main.js": "/react-naver-movie-api/static/js/main.2c3268a0.js",
     "static/js/787.834a7d99.chunk.js": "/react-naver-movie-api/static/js/787.834a7d99.chunk.js",
     "index.html": "/react-naver-movie-api/index.html",
-    "main.ad02f6ff.js.map": "/react-naver-movie-api/static/js/main.ad02f6ff.js.map",
+    "main.2c3268a0.js.map": "/react-naver-movie-api/static/js/main.2c3268a0.js.map",
     "787.834a7d99.chunk.js.map": "/react-naver-movie-api/static/js/787.834a7d99.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.ad02f6ff.js"
+    "static/js/main.2c3268a0.js"
   ]
 }
