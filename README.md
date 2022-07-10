@@ -1,14 +1,76 @@
-## gh-pages에서 proxy관련
+## gh-pages에서 proxy관련(cors)
 
-결론부터 얘기하자면 gh-pages 패키지에서는 proxy가 잘 적용이 안되는것 같다. dev(본인 로컬 개발자 모드)에서는 proxy가 잘 적용이 된다(http-proxy-middleware)
+결론부터 얘기하자면 gh-pages 패키지에서는 proxy가 잘 적용이 안되는것 같다. dev(본인 로컬 개발자 모드)에서는 proxy가 잘 적용이 된다(`http-proxy-middleware`)  
+따라서 **다른 이의 프록시 서버를 이용해서 api 요청에 성공**하였다.(서버구동 안하고 클라이언트 부분에서만 해결하려고 해당방법 사용. 서버 구동한다면 반드시 서버쪽에서 `Access-Control-Allow-Origin` 응답 헤더부분을 수정하는것을 강추)
 
 이번 소스에서는 api를 사용하기 위해 요청을 하지만, 클라이언트와 서버가 사용하는 포트가 다를경우 api요청을 자동으로 거절하는 cors 문제가 있었다.
 
-cors 해결을 위해 proxy를 이용해 요청 주소를 api 서버와 맞게 잘 변경해서 사용했는데, dev에선 잘 동작하고 gh-pages에선 잘 동작하지 않는다. 
+cors 해결을 위해 proxy를 이용해 요청 주소를 api 서버와 맞게 잘 변경해서 사용했는데, dev에선 잘 동작하고 gh-pages 에선 잘 동작하지 않는다.  [관련 내용](https://stackoverflow.com/questions/62183156/create-react-app-gh-pages-deploy-with-proxy)
 
-아마도 gh-pages(리액트때매 사용했음)로 하지 않는다면 proxy 잘 적용 될 것 같긴하다.  
-https://github.com/jiho3894/Charliving 그런데 이분은 똑같이 리액트이며, api를 사용하는데 왜 cors문제가 없는건지 궁금하다..  
-https://github.com/velopert/react-tutorial/blob/master/redux-middleware/09-cors-and-proxy.md
+- **첫번째 의문**은 gh-pages 패키지를 사용해 npm run deploy를 통해 build폴더 생성 시킬때 http-proxy-middleware관련 내용은 build폴더에 소스로 같이 안들어 간다는걸까?
+- **두번째 의문**은 gh-page인 깃허브에서 제공하는 깃허브 페이지 기능 자체 즉, 깃허브에서 그냥 proxy를 지원하지 않는다는건지 의문이 들었다.
+  * **참고로 클라이언트 관점에서만 수정**하려고 하는중이다.(서버는 애초에 cors 정책이 적용되지 않으므로 서버끼리 api 요청은 전혀 cors 문제가 발생하지 않는다.)
+
+**세번째 의문**은 구글링 하다가 들었다. [관련 내용](https://github.com/jiho3894/Charliving)  이분의 코드를 보면, 똑같이 react에 gh-pages사용하며 api까지 사용하였는데 애초에 cors문제가 발생하지 않았다.  
+
+* 이유가 궁금하여서 똑같은 api를 사용해서 요청해봤는데 정말 cors문제가 발생하지 않았다.
+* 그렇다면 세번째 의문은 왜 해당 [TMDB](https://developers.themoviedb.org/3) API는 cors 문제가 없는건지 너무 궁금하다.
+  * 나의 생각에는 TMDB API는 네이버 API와 다르게 서버에서 응답헤더에 `Access-Control-Allow-Origin:*` 이런식으로 설정한것은 아닐까 싶다. 정확한건 몰라서 누군가 알려준다면 정말 좋을것 같다. => 어디서 얼핏 SOP 관련 문제를 네이버에서 체크한다고 들었던것 같다.
+
+결국 https://cors-anywhere.herokuapp.com 인 남의 프록시 서버를 통해 우리가 요청할때 이 프록시 서버가 중간에 요청을 가로채서 HTTP 응답 헤더에 `Access-Control-Allow-Origin:* `를 설정해서 응답해준다. 이 덕분에 해결하긴 했는데, `Access-Control-Allow-Origin:*` 방식의 `*`은 모든 도메인 허용을 의미하기 때문에 만약 직접 서버에서 수정하게 된다면 그때는 적절히 허용할 도메인(URL)만 적용할것을 추천한다.
+
+참고로 해당 프록시 서버 사이트는 악용사례도 많고 이래서 관리자가 조금 제약을 걸어뒀다. [관련내용](https://github.com/Rob--W/cors-anywhere/issues/301)  
+해당 내용에서 핵심은 https://cors-anywhere.herokuapp.com 들어가면 아마 demo 서버 관련 얘기 있었을것이다. 그걸 허용? 했었을거다. 그러고나면 해당 프록시서버 이용할 수 있으니 이부분은 꼭 체크하고 넘어가길 바란다.(속도도 일부러 느리게 관리자가 바꾸셨다ㅜ)
+
+
+
+axios로 하면 혹시나 baseURL이 있으니까 잘 될까 싶었지만 여기도 dev만 되고 있다.
+
+```js
+const URL = "search/movie.json";
+export const requestGetMovieList = async (offset =1, limit =5) => {
+  const response = await axios({
+    method: "get",
+    url: URL,
+    params: {
+      query: "어벤져스",
+      start: offset,
+      display: limit,
+    },
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      "X-Naver-Client-Id": process.env.REACT_APP_NAVER_CLIENT_ID,
+      "X-Naver-Client-Secret": process.env.REACT_APP_NAVER_CLIENT_SECRET,
+    },
+  });
+  console.log(response.data);
+  return response.data;
+```
+
+깃헙으로 넘어가면 아래 코드인 proxy부분이 안먹히는것 같다.
+
+```js
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0",
+    "http-proxy-middleware": "^2.0.6"
+  },
+  "proxy": "https://openapi.naver.com/v1/"
+}
+```
+
+만약 proxy 여러개 url 정의하고 싶다면? `http-proxy-middleware` 사용 추천. 물론 dev에서만 되고, 깃헙은 X. 
+
+참고로 따로 서버 만들어 배포하는건 당연히 전혀 문제없다. 이경우 크로스브라우징(CROS)문제 해결방안도 더욱 많다.
+
+
+
+> 참고해볼 사이트
+>
+> > [참고 문헌](https://github.com/velopert/react-tutorial/blob/master/redux-middleware/09-cors-and-proxy.md)
+>
+> > [참고 문헌](https://xiubindev.tistory.com/115)
 
 **gh-pages 실행화면 : [URL](https://bh946.github.io/react-naver-movie-api/)**
 
