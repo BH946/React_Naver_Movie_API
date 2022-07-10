@@ -188,3 +188,8 @@ export const requestGetMovieList = async (offset =1, limit =5) => {
   - [`MovieContainer`](./src/containers/MovieContainer.jsx) 컴포넌트 컨테이너의 `setMovieList`에 값을 매개변수로 넣는 방식이 아닌 콜백 함수를 매개변수로 넣는 방식을 채택한 코드
   - 용이성을 표현
 
+<br>
+
+## 참고
+
+`gh-pages`에서 npm run deploy는 수정때마다 입력해서 적용하면 되고, build폴더가 수정되며 gh-pages브랜치에까지 바로 push된다.
