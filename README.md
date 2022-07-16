@@ -80,7 +80,7 @@ export const requestGetMovieList = async (offset =1, limit =5) => {
 
 <br>
 
-## 기본 필요지식, 기초
+## 기본 지식
 
 **git bash로 npx create-react-app 폴더명 으로 설치**
 
