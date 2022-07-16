@@ -1,7 +1,7 @@
 {
   "name": "react-naver-movie-api",
   "version": "0.1.0",
-  "homepage": "https://bh946.github.io/react-naver-movie-api/",
+  "homepage": "https://bh946.github.io/fullstack-clone/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
