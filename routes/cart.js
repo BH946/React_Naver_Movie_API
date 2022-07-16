@@ -1,0 +1,66 @@
+const router = require("express").Router()
+const Cart = require("../models/Cart");
+const {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin} = require("./verifyToken") // 토큰 체크 함수
+
+// CREATE - 장바구니 만들기(회원 인증만 필요)
+router.post("/", verifyToken, async (req, res) => {
+    const newCart = new Cart(req.body)
+
+    try {
+        const savedCart = await newCart.save(); // db에 적용
+        res.status(200).json(savedCart);
+    } catch(err) {
+        res.status(500).json(err);
+    }
+})
+
+
+// UPDATE - 자기자신 or 관리자
+router.put("/:id", verifyTokenAndAuthorization, async (req,res) => {
+    try{
+        const updatedCart = await Cart.findByIdAndUpdate(
+            req.params.id, // id 찾기
+            {
+                $set: req.body // body 업데이트( 전부 update)
+            },
+            { new: true}
+        );
+        res.status(200).json(updatedCart)
+    } catch(err) {
+        res.status(500).json(err);
+    }
+})
+
+// DELETE - 자기자신 or 관리자
+router.delete("/:id", verifyTokenAndAuthorization, async (req, res)=>{
+    try{
+        await Cart.findByIdAndDelete(req.params.id)
+        res.status(200).json("Cart has been deleted...")
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+// GET USER Cart
+router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res)=>{
+    try{
+        const cart = await Cart.findOne({userId: req.params.userId});
+        res.status(200).json(cart)
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+
+// GET ALL
+router.get("/", verifyTokenAndAdmin, async (req, res) =>{
+    try{
+        const carts = await Cart.find();
+        res.status(200).json(carts)
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+
+module.exports = router
