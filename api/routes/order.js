@@ -66,13 +66,21 @@ router.get("/", verifyTokenAndAdmin, async (req, res) =>{
 // GET MONTHLY INCOM - 수입 확인(관리자만)
 // STATS는 매월 데이터 구했다면, INCOM은 지난달과 지지난달 수입 비교위해 데이터 구함
 router.get("/income", verifyTokenAndAdmin, async (req, res)=>{
+    const productId = req.query.pid; // query.pid는 url의 id부분 의미하는듯
     const date = new Date();
     const lastMonth = new Date(date.setMonth(date.getMonth()-1))
     const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth()-1))
 
     try{
         const income = await Order.aggregate([
-            { $match: { createdAt: { $gte: previousMonth}}}, // 2달 이전부터 이후 데이터 match할것이다.
+            {   $match: {
+                    createdAt: { $gte: previousMonth},
+                    ...(productId && {
+                        products: { $elemMatch: { productId } },
+                    }),
+                },
+            }, // 2달 이전부터 이후 데이터 match할것이다.
+
             {
                 $project: {
                     month: { $month: "$createdAt"},

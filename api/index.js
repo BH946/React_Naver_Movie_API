@@ -25,6 +25,6 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 
 // env에 PORT가 없다면 5000으로 사용(localhost)
-app.listen(process.env.PORT || 5000, ()=> {
+app.listen(process.env.PORT || 5000, () => {
     console.log("Backend server is running!");
 })
