@@ -2,7 +2,10 @@ import styled from '@emotion/styled';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined'
 import Badge from '@mui/material/Badge/Badge'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {mobile} from '../responsive'
+import { logout } from "../redux/userRedux"
 
 // width:33.33333333333% 이런식으로 아무리 나눠도 100%나뉘는게 아니기 때문에
 // flex 같은걸 사용
@@ -69,6 +72,14 @@ const MenuItem = styled.div`
 `
 
 const Navbar = () => {
+  const quantity = useSelector(state=>state.cart.quantity)
+  const dispatch = useDispatch();
+
+  const test = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  }
+
   return (
     <Container>
       <Wrapper>
@@ -81,13 +92,17 @@ const Navbar = () => {
         </Left>
         <Center><Logo>LAMA</Logo></Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
+          <MenuItem onClick={test}>REGISTER</MenuItem>
+          <Link to="/login">
           <MenuItem>SIGN IN</MenuItem>
+          </Link>
+          <Link to="/cart">
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={quantity} color="primary">
               <ShoppingCartOutlined/>
             </Badge>
           </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>
