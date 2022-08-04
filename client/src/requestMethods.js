@@ -12,6 +12,6 @@ export const publicRequest = axios.create({
 // user요청에는 헤더에 토큰이 필요
 export const userRequest = axios.create({
     baseURL: BASE_URL,
-    header: { token: `Bearer ${TOKEN}`},
+    headers: { token: `Bearer ${TOKEN}`},
 });
 
