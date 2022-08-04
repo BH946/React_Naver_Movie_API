@@ -4,6 +4,8 @@
 
 `font` 사용한 곳 : [구글 폰트](https://fonts.google.com/specimen/Urbanist)
 
+* **Urbanist** 글꼴 사용
+
 `사용자 스타일 태그`는 **@emotion**으로 styled 사용
 
 `yarn` 사용
