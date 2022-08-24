@@ -1,3 +1,29 @@
+# fullstack-clone
+
+**클론 코딩해보면서 정리한 프로젝트이며 브랜치 별로 정리하였다.**
+
+* [`react-naver-movie-api-clone`](https://github.com/BH946/fullstack-clone/tree/react-naver-movie-api-clone) 란 네이버의 영화검색 api를 활용해서 해당 영화 검색하는 웹이다.
+  * `gh-pages` 란 브랜치를 활용해서 깃허브를 통해 웹을 호스팅한다.
+  * **gh-pages 실행화면 : [URL](https://bh946.github.io/fullstack-clone/)**
+  * **참고한 곳 : 학교에서 2주간 특강을 통해 접했던 내용**
+* [`shop-mern`](https://github.com/BH946/fullstack-clone/tree/shop-mern) 란 아래 3개로 구성된것을 합친 프로젝트이며 쇼핑몰 사이트를 보여준다.
+  * `shop-cart-admin`  란 관리자 화면이다.
+  * `shop-cart-ecommerce-rest-api` 란 rest api 형식으로 서버를 구축한 것이다.
+  * `shop-cart-ui` 란 쇼핑몰 사이트의 메인 UI 화면이다.
+  * **참고한 사이트 : [URL](https://www.youtube.com/watch?v=y66RgYMAgSo&list=PLjNzq0dzIM348Fh3HdTLBgb4gmXFLN_85&index=6&t=5504s)**
+
+
+
+<br>
+
+## 실행 화면 - react-naver-movie-api-clone
+
+<img src="/images/README/image-20220824171926573.png" alt="image-20220824171926573" style="zoom:80%;" />
+
+<img src="/images/README/image-20220824171620008.png" alt="image-20220824171620008" style="zoom:80%;" />
+
+<br>
+
 ## gh-pages에서 proxy관련(cors)
 
 결론부터 얘기하자면 gh-pages 패키지에서는 proxy가 잘 적용이 안되는것 같다. dev(본인 로컬 개발자 모드)에서는 proxy가 잘 적용이 된다(`http-proxy-middleware`)  
