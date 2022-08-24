@@ -76,7 +76,7 @@ export const requestGetMovieList = async (offset =1, limit =5) => {
 >
 > > [참고 문헌](https://xiubindev.tistory.com/115)
 
-**gh-pages 실행화면 : [URL](https://bh946.github.io/react-naver-movie-api/)**
+**gh-pages 실행화면 : [URL](https://bh946.github.io/fullstack-clone/)**
 
 <br>
 
