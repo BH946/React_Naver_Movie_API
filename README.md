@@ -1,3 +1,47 @@
+## RUN
+
+**실행화면**
+
+* **3개 전부 터미널에서 yarn start로 구동**
+
+
+
+### 홈
+
+<img src="/images/README/image-20220824173910106.png" alt="image-20220824173910106" style="zoom:50%;" />
+
+<img src="/images/README/image-20220824173940588.png" alt="image-20220824173940588" style="zoom:50%;" />
+
+<img src="/images/README/image-20220824173954717.png" alt="image-20220824173954717" style="zoom:50%;" />
+
+<img src="/images/README/image-20220824174008468.png" alt="image-20220824174008468" style="zoom:50%;" />
+
+
+
+### 카테고리
+
+<img src="/images/README/image-20220824174437614.png" alt="image-20220824174437614" style="zoom:50%;" />
+
+### 제품
+
+<img src="/images/README/image-20220824174502698.png" alt="image-20220824174502698" style="zoom:50%;" />
+
+### 장바구니
+
+<img src="/images/README/image-20220824174551515.png" alt="image-20220824174551515" style="zoom:50%;" />
+
+### 로그인
+
+<img src="/images/README/image-20220824174613516.png" alt="image-20220824174613516" style="zoom:80%;" />
+
+### 관리자 화면
+
+<img src="/images/README/image-20220824175415715.png" alt="image-20220824175415715" style="zoom:50%;" />
+
+<img src="/images/README/image-20220824175440014.png" alt="image-20220824175440014" style="zoom:60%;" />
+
+<br>
+
 ## Information
 
 **Mern이란?**  `MongoDB, Express, React, Node.js` 를 뜻하며  
