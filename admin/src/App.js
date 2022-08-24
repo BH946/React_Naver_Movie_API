@@ -17,7 +17,7 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 
 function App() {
-  const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin;
+  const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser?.isAdmin;
   // 현재는 localStorage가 있는 경우만 정상 동작. 나중에 state로 바꿀것
   return (
     <BrowserRouter>
